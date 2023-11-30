@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://cynxpokj5ujbx"]
+
+[ext_resource type="Script" path="res://player/money parry/money_parry.gd" id="1_rxi3p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_girtk"]
+radius = 48.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hrose"]
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 84.5
+initial_velocity_max = 84.5
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6qoc6"]
+size = Vector2(8, 8)
+
+[node name="moneyParry" type="Area2D"]
+script = ExtResource("1_rxi3p")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_girtk")
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_hrose")
+texture = SubResource("PlaceholderTexture2D_6qoc6")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.53
+
+[node name="DestroyTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="enemy_collided"]
+[connection signal="timeout" from="DestroyTimer" to="." method="_destroy_timer"]
