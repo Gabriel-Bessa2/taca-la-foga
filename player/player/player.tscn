@@ -10,3 +10,9 @@ script = ExtResource("1_bu8vp")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_i62y1")
+
+[node name="DeathResetTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="DeathResetTimer" to="." method="_on_death_reset_timer_timeout"]

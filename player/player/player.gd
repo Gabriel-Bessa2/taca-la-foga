@@ -4,11 +4,14 @@ extends CharacterBody2D
 @onready var flamethrowerResource: Resource = preload("res://player/flamethrower/flamethrower.tscn")
 @onready var moneyparryResource: Resource = preload("res://player/money parry/money_parry.tscn")
 
-@export var WALK_SPEED : float = 150
-@export var FLAMETHROWER_WALK_SPEED : float = 50
-@export var WALK_ACCELERATION : float = 0.2
+@export var WALK_SPEED: float = 150
+@export var FLAMETHROWER_WALK_SPEED: float = 50
+@export var WALK_ACCELERATION: float = 0.2
 
-var state : String = "move"
+enum PLAYER_STATES {MOVE, FIRE, CASH, HURT, DEAD}
+const HP_MAX: int = 100
+var state: PLAYER_STATES = PLAYER_STATES.MOVE
+var hp: int = HP_MAX
 
 var inputDirection: Vector2 = Vector2.ZERO
 var inputFlamethrower: bool = false
@@ -20,15 +23,15 @@ func _physics_process(_delta):
 	get_input()
 	
 	match state:
-		"move":
+		PLAYER_STATES.MOVE:
 			velocity = lerp(velocity, WALK_SPEED*inputDirection, WALK_ACCELERATION)
 			
 			if inputMoneyparry:
-				state = "cash"
+				state = PLAYER_STATES.CASH
 			elif inputFlamethrower:
-				state = "fire"
+				state = PLAYER_STATES.FIRE
 				
-		"fire":
+		PLAYER_STATES.FIRE:
 			velocity = lerp(velocity, FLAMETHROWER_WALK_SPEED*inputDirection, WALK_ACCELERATION)
 			
 			var flamethrowerInstance: Flamethrower = flamethrowerResource.instantiate()
@@ -38,9 +41,9 @@ func _physics_process(_delta):
 			get_tree().current_scene.add_child(flamethrowerInstance)
 			
 			if !inputFlamethrower:
-				state = "move"
+				state = PLAYER_STATES.MOVE
 			
-		"cash":
+		PLAYER_STATES.CASH:
 			#script temporario, é necessario um AnimationPlayer para definir
 			#o timing em que a instancia será criada bem como o retorno para o estado "move"
 			velocity = Vector2.ZERO#lerp(velocity, Vector2.ZERO, WALK_ACCELERATION)
@@ -48,7 +51,10 @@ func _physics_process(_delta):
 			var moneyparryInstance = moneyparryResource.instantiate()
 			add_child(moneyparryInstance)
 			
-			state = "move"
+			state = PLAYER_STATES.MOVE
+			
+		PLAYER_STATES.DEAD:
+			velocity = Vector2.ZERO
 	
 	move_and_slide()
 
@@ -64,3 +70,15 @@ func get_input():
 	inputMoneyparry = Input.is_action_just_pressed("cash_parry")
 	
 	aimDirection = lerp(aimDirection, aimTargetDirection, 0.4)
+
+func gethit(damage: int):
+	#state = PLAYER_STATES.HURT
+	
+	hp = max(hp - damage, 0)
+	if hp == 0:
+		$DeathResetTimer.start()
+		state = PLAYER_STATES.DEAD
+
+
+func _on_death_reset_timer_timeout():
+	get_tree().reload_current_scene()
