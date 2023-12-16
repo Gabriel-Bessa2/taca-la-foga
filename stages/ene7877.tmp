@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://b54k6botwgcr3"]
+
+[ext_resource type="PackedScene" uid="uid://bg4at2sl2np05" path="res://Enemies/test_enemy/test_enemy.tscn" id="2_ovsiu"]
+[ext_resource type="PackedScene" uid="uid://bql0nqi4l7dw3" path="res://player/player/player.tscn" id="3_t1xj1"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_457md"]
+vertices = PackedVector2Array(250, 139, 5, 139, 5, 4, 250, 4)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(5, 4, 250, 4, 250, 139, 5, 139)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
+
+[node name="EnemyNavigationTest" type="Node2D"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_457md")
+
+[node name="Player" parent="." instance=ExtResource("3_t1xj1")]
+position = Vector2(52, 81)
+
+[node name="TestEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_ovsiu")]
+position = Vector2(218, 38)
+target = NodePath("../Player")
+attack_range = 20.0

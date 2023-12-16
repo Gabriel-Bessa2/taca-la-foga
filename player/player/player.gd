@@ -72,6 +72,7 @@ func get_input():
 	aimDirection = lerp(aimDirection, aimTargetDirection, 0.4)
 
 func gethit(damage: int):
+	print("ai")
 	#state = PLAYER_STATES.HURT
 	
 	hp = max(hp - damage, 0)
@@ -82,3 +83,8 @@ func gethit(damage: int):
 
 func _on_death_reset_timer_timeout():
 	get_tree().reload_current_scene()
+
+
+func _on_area_2d_area_entered(area):
+	#print(area)
+	pass
