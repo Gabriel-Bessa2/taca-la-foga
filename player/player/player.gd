@@ -9,7 +9,7 @@ extends CharacterBody2D
 @export var WALK_ACCELERATION: float = 0.2
 
 enum PLAYER_STATES {MOVE, FIRE, CASH, HURT, DEAD}
-const HP_MAX: int = 100
+const HP_MAX: int = 10
 var state: PLAYER_STATES = PLAYER_STATES.MOVE
 var hp: int = HP_MAX
 
@@ -70,6 +70,7 @@ func get_input():
 	inputMoneyparry = Input.is_action_just_pressed("cash_parry")
 	
 	aimDirection = lerp(aimDirection, aimTargetDirection, 0.4)
+	$Sprite2D.rotation = aimDirection.angle()
 
 func gethit(damage: int):
 	print("ai")
