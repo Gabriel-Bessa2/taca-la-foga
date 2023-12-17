@@ -80,9 +80,6 @@ func get_input():
 	Sprite.rotation = aimDirection.angle()
 
 func gethit(damage: int):
-	print("ai")
-	#state = PLAYER_STATES.HURT
-	
 	hp = max(hp - damage, 0)
 	if hp == 0:
 		AnimPlayer.play("dead")
@@ -98,7 +95,3 @@ func change_state(stateToChange: PLAYER_STATES):
 func instance_money_parry():
 	var moneyparryInstance = moneyparryResource.instantiate()
 	add_child(moneyparryInstance)
-
-func _on_area_2d_area_entered(area):
-	#print(area)
-	pass
