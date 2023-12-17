@@ -1,15 +1,23 @@
 extends Node2D
 
-@export_range(256, 25600, 16) var width: int = 256
-@export_range(144, 14400, 16) var height: int = 144
+@export_group("Camera Bounds")
+## the width of the level. Camera x position will always be between 0 and limit_width
+@export_range(256, 25600, 16) var limit_width: int = 256
+## the height of the level. Camera y position will always be between 0 and limit_height
+@export_range(144, 14400, 16) var limit_height: int = 144
+@export_group("Properties")
+## player node to follow
 @export var player: Player
+## how long takes for the camera to get to player position
 @export_range(1,100) var smoothness: int = 2
-var proportions: Vector2 = Vector2(width, height)
+var proportions: Vector2 = Vector2(limit_width, limit_height)
 
 func _ready():
-	proportions = Vector2(width, height)
+	proportions = Vector2(limit_width, limit_height)
 	if player == null:
 		push_error("player undefined on camera scene")
+	if proportions == Vector2(256, 144):
+		push_warning("camera limits set to minimum, change it in camera node")
 	lock_position()
 
 func _physics_process(_delta):
