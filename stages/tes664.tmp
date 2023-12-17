@@ -23,4 +23,7 @@ target = NodePath("../Player")
 navigation_polygon = SubResource("NavigationPolygon_w8xdi")
 
 [node name="Camera" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_5tkrm")]
+width = 1008
+height = 1008
 player = NodePath("../Player")
+smoothness = 2

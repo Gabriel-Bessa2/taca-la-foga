@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var dmg: int = 1
 @export var speed: int = 50
 var moneyMultiplier: int = 1
+var isAttacking: bool = false
 
 enum ENEMY_STATES {ALIVE, FOLLOWING, DEAD, HURT, LOAD_ATTACK, ATTACKING}
 var current_state: ENEMY_STATES

@@ -4,6 +4,9 @@ extends CharacterBody2D
 @onready var flamethrowerResource: Resource = preload("res://player/flamethrower/flamethrower.tscn")
 @onready var moneyparryResource: Resource = preload("res://player/money parry/money_parry.tscn")
 
+@onready var Sprite: Sprite2D = $Sprite
+@onready var AnimPlayer: AnimationPlayer = $AnimationPlayer
+
 @export var WALK_SPEED: float = 150
 @export var FLAMETHROWER_WALK_SPEED: float = 50
 @export var WALK_ACCELERATION: float = 0.2
@@ -26,6 +29,11 @@ func _physics_process(_delta):
 		PLAYER_STATES.MOVE:
 			velocity = lerp(velocity, WALK_SPEED*inputDirection, WALK_ACCELERATION)
 			
+			if inputDirection.length() > 0:
+				AnimPlayer.play("walk")
+			else:
+				AnimPlayer.play("idle")
+			
 			if inputMoneyparry:
 				state = PLAYER_STATES.CASH
 			elif inputFlamethrower:
@@ -34,8 +42,13 @@ func _physics_process(_delta):
 		PLAYER_STATES.FIRE:
 			velocity = lerp(velocity, FLAMETHROWER_WALK_SPEED*inputDirection, WALK_ACCELERATION)
 			
+			if inputDirection.length() > 0:
+				AnimPlayer.play("walk_slow")
+			else:
+				AnimPlayer.play("idle")
+			
 			var flamethrowerInstance: Flamethrower = flamethrowerResource.instantiate()
-			flamethrowerInstance.position = position
+			flamethrowerInstance.position = position + aimDirection*8
 			flamethrowerInstance.direction = aimDirection
 			flamethrowerInstance.rotation_degrees = randi_range(0, 360)
 			get_tree().current_scene.add_child(flamethrowerInstance)
@@ -44,14 +57,8 @@ func _physics_process(_delta):
 				state = PLAYER_STATES.MOVE
 			
 		PLAYER_STATES.CASH:
-			#script temporario, é necessario um AnimationPlayer para definir
-			#o timing em que a instancia será criada bem como o retorno para o estado "move"
-			velocity = Vector2.ZERO#lerp(velocity, Vector2.ZERO, WALK_ACCELERATION)
-			
-			var moneyparryInstance = moneyparryResource.instantiate()
-			add_child(moneyparryInstance)
-			
-			state = PLAYER_STATES.MOVE
+			AnimPlayer.play("parry")
+			velocity = velocity.lerp(Vector2.ZERO, WALK_ACCELERATION)
 			
 		PLAYER_STATES.DEAD:
 			velocity = Vector2.ZERO
@@ -70,7 +77,7 @@ func get_input():
 	inputMoneyparry = Input.is_action_just_pressed("cash_parry")
 	
 	aimDirection = lerp(aimDirection, aimTargetDirection, 0.4)
-	$Sprite2D.rotation = aimDirection.angle()
+	Sprite.rotation = aimDirection.angle()
 
 func gethit(damage: int):
 	print("ai")
@@ -78,13 +85,19 @@ func gethit(damage: int):
 	
 	hp = max(hp - damage, 0)
 	if hp == 0:
-		$DeathResetTimer.start()
+		AnimPlayer.play("dead")
 		state = PLAYER_STATES.DEAD
 
 
 func _on_death_reset_timer_timeout():
 	get_tree().reload_current_scene()
 
+func change_state(stateToChange: PLAYER_STATES):
+	state = stateToChange
+
+func instance_money_parry():
+	var moneyparryInstance = moneyparryResource.instantiate()
+	add_child(moneyparryInstance)
 
 func _on_area_2d_area_entered(area):
 	#print(area)
