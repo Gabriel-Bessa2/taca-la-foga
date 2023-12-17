@@ -8,7 +8,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rvuer"]
 size = Vector2(15, 28)
 
-[node name="TestEnemy" type="CharacterBody2D"]
+[node name="ManoGuarda" type="CharacterBody2D"]
 motion_mode = 1
 slide_on_ceiling = false
 wall_min_slide_angle = 0.0
