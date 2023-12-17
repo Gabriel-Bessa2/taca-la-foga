@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://dph4bjrdf2s56"]
+
+[ext_resource type="Script" path="res://Enemies/Moleque do Olho Roxo/MolequeOlhoRoxo.gd" id="1_6x1c4"]
+[ext_resource type="Texture2D" uid="uid://bwen7puonvdjj" path="res://icon.svg" id="2_xeo8y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gb64u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rvuer"]
+size = Vector2(15, 28)
+
+[node name="MoloqueOlhoRoxo" type="CharacterBody2D"]
+motion_mode = 1
+slide_on_ceiling = false
+wall_min_slide_angle = 0.0
+script = ExtResource("1_6x1c4")
+attack_range = 90.0
+flee_range = 70.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_gb64u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 3.14159
+scale = Vector2(0.109375, 0.109375)
+texture = ExtResource("2_xeo8y")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+avoidance_enabled = true
+max_neighbors = 1
+avoidance_layers = 0
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="HitArea" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+position = Vector2(18.5, 0)
+shape = SubResource("RectangleShape2D_rvuer")
+
+[node name="Sprite2D" type="Sprite2D" parent="HitArea"]
+modulate = Color(0.639216, 0.0666667, 0.0313726, 1)
+position = Vector2(18.5, -9.53674e-07)
+scale = Vector2(0.117187, 0.21875)
+texture = ExtResource("2_xeo8y")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
