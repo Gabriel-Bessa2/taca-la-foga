@@ -61,6 +61,8 @@ func handle_navigation() -> void:
 		var next_path_position: Vector2 = navigation_agent.get_next_path_position()
 
 		velocity = current_agent_position.direction_to(next_path_position) * speed
+		look_at(target.position)
+		
 		move_and_slide()
 	elif (navigation_agent.is_target_reached()):
 		current_state = ENEMY_STATES.LOAD_ATTACK

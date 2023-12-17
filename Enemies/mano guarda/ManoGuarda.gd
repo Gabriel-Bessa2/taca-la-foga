@@ -1,4 +1,4 @@
-class_name TestEnemy
+class_name ManoGuarda
 extends Enemy
 
 @onready var hit_area = $HitArea
@@ -11,10 +11,6 @@ func _ready():
 
 func _physics_process(_delta):
 	super(_delta)
-	if(abs(position.direction_to(target.position).x) > abs(position.direction_to(target.position).y)):
-		hit_area.rotation_degrees = -180 if (position.direction_to(target.position).x / abs(position.direction_to(target.position).x)) <= 0 else 0
-	else:
-		hit_area.rotation_degrees = 90 * (position.direction_to(target.position).y / abs(position.direction_to(target.position).y))
 		
 	#print_debug(health)
 	match current_state:
