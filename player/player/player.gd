@@ -66,15 +66,15 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func get_input():
+	inputFlamethrower = Input.is_action_pressed("flamethrower")
+	inputMoneyparry = Input.is_action_just_pressed("cash_parry")
+	
 	inputDirection.x = Input.get_axis("left", "right")
 	inputDirection.y = Input.get_axis("up","down")
 	inputDirection = inputDirection.normalized()
 	
-	if inputDirection.length() != 0:
+	if inputDirection.length() != 0 and !inputFlamethrower:
 		aimTargetDirection = inputDirection
-	
-	inputFlamethrower = Input.is_action_pressed("flamethrower")
-	inputMoneyparry = Input.is_action_just_pressed("cash_parry")
 	
 	aimDirection = lerp(aimDirection, aimTargetDirection, 0.4)
 	Sprite.rotation = aimDirection.angle()
