@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dk2uhic5ibiyn" path="res://player/player-sprite-sheet.png" id="2_skmtw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i62y1"]
-radius = 8.0
+radius = 4.0
 
 [sub_resource type="Animation" id="Animation_n8sr8"]
 length = 0.001
@@ -146,11 +146,6 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_bu8vp")
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="Collision" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_i62y1")
-
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_i62y1")
 
@@ -163,5 +158,3 @@ vframes = 4
 libraries = {
 "": SubResource("AnimationLibrary_4lnpg")
 }
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
