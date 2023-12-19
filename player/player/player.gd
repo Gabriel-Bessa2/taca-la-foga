@@ -66,23 +66,20 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func get_input():
+	inputFlamethrower = Input.is_action_pressed("flamethrower")
+	inputMoneyparry = Input.is_action_just_pressed("cash_parry")
+	
 	inputDirection.x = Input.get_axis("left", "right")
 	inputDirection.y = Input.get_axis("up","down")
 	inputDirection = inputDirection.normalized()
 	
-	if inputDirection.length() != 0:
+	if inputDirection.length() != 0 and !inputFlamethrower:
 		aimTargetDirection = inputDirection
-	
-	inputFlamethrower = Input.is_action_pressed("flamethrower")
-	inputMoneyparry = Input.is_action_just_pressed("cash_parry")
 	
 	aimDirection = lerp(aimDirection, aimTargetDirection, 0.4)
 	Sprite.rotation = aimDirection.angle()
 
 func gethit(damage: int):
-	print("ai")
-	#state = PLAYER_STATES.HURT
-	
 	hp = max(hp - damage, 0)
 	if hp == 0:
 		AnimPlayer.play("dead")
@@ -98,7 +95,3 @@ func change_state(stateToChange: PLAYER_STATES):
 func instance_money_parry():
 	var moneyparryInstance = moneyparryResource.instantiate()
 	add_child(moneyparryInstance)
-
-func _on_area_2d_area_entered(area):
-	#print(area)
-	pass

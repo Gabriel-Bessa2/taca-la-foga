@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://boe68kfxyopxb"]
 
 [ext_resource type="PackedScene" uid="uid://bql0nqi4l7dw3" path="res://player/player/player.tscn" id="1_j123j"]
-[ext_resource type="PackedScene" uid="uid://bg4at2sl2np05" path="res://Enemies/test_enemy/test_enemy.tscn" id="2_geynv"]
+[ext_resource type="PackedScene" uid="uid://bg4at2sl2np05" path="res://Enemies/mano guarda/mano_guarda.tscn" id="2_geynv"]
 [ext_resource type="PackedScene" uid="uid://cuwpswg1go8v6" path="res://stages/camera/camera.tscn" id="3_5tkrm"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_w8xdi"]
