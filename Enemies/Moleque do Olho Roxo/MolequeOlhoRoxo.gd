@@ -65,6 +65,8 @@ func _shoot():
 	var bullet = ammo.instantiate()
 	bullet.position = position
 	bullet.direction = position.direction_to(target.position)
+	bullet.target = target
+	bullet.damage = 4
 	get_tree().current_scene.add_child(bullet)
 
 
