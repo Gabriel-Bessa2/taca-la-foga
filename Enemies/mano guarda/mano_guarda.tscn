@@ -243,14 +243,14 @@ blend_mode = 1
 offsets = PackedFloat32Array(0, 0.294118, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 0.298039, 0, 1, 0.180392, 0.0784314, 0.352941, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_akr0l"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_plkmo"]
 gradient = SubResource("Gradient_dr7gl")
 
 [sub_resource type="Curve" id="Curve_lb4rg"]
 _data = [Vector2(0.05, 0), 0.0, 0.0, 0, 0, Vector2(0.107143, 1), 0.0880503, 0.0880503, 0, 0, Vector2(1, 0), -0.0433035, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_yxb2x"]
+[sub_resource type="CurveTexture" id="CurveTexture_sef1a"]
 curve = SubResource("Curve_lb4rg")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_67mxk"]
@@ -263,8 +263,8 @@ initial_velocity_min = 5.0
 initial_velocity_max = 10.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.5
-scale_curve = SubResource("CurveTexture_yxb2x")
-color_ramp = SubResource("GradientTexture1D_akr0l")
+scale_curve = SubResource("CurveTexture_sef1a")
+color_ramp = SubResource("GradientTexture1D_plkmo")
 
 [node name="ManoGuarda" type="CharacterBody2D"]
 motion_mode = 1

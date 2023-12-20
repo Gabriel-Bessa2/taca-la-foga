@@ -47,12 +47,13 @@ func _process(_delta):
 
 func _physics_process(_delta):
 	var player_distance = position.distance_to(target.position)
+	#print(current_state)
 	
 	match current_state:
 		ENEMY_STATES.IDLE:
 			velocity = Vector2.ZERO
 			
-			if(player_distance < sight_range and player_distance <= attack_range and canAttack):
+			if(player_distance < sight_range and player_distance <= attack_range and canAttack && flee_range == -1):
 				change_state(ENEMY_STATES.ATTACKING)
 			elif(player_distance < sight_range):
 				change_state(ENEMY_STATES.FOLLOWING)
@@ -60,7 +61,7 @@ func _physics_process(_delta):
 		ENEMY_STATES.FOLLOWING:
 			handle_navigation()
 			
-			if(player_distance < sight_range and player_distance <= attack_range and canAttack):
+			if(player_distance < sight_range and player_distance <= attack_range and canAttack && flee_range == -1):
 				change_state(ENEMY_STATES.ATTACKING)
 			elif(player_distance < sight_range and player_distance <= attack_range):
 				change_state(ENEMY_STATES.IDLE)
@@ -77,7 +78,11 @@ func _physics_process(_delta):
 func handle_navigation() -> void:
 	call_deferred("actor_setup")
 	#print(navigation_agent.is_navigation_finished())
+	if (navigation_agent.is_navigation_finished() && flee_range != -1):
+		change_state(ENEMY_STATES.ATTACKING)
+		
 	if (!navigation_agent.is_navigation_finished()):
+		print("a2")
 		var current_agent_position: Vector2 = global_position
 		var next_path_position: Vector2 = navigation_agent.get_next_path_position()
 
@@ -91,7 +96,7 @@ func actor_setup():
 	var direction: Vector2 = position.direction_to(target.position)
 	#print(direction)
 	if(flee_range != -1 && player_distance < flee_range):
-		print("A1")
+		#print("A1")
 		var safe_distance: float = flee_range - player_distance
 		var flee_position: Vector2 = Vector2((position.x - safe_distance if direction.x > 0 else position.x + safe_distance), (position.y - safe_distance if direction.y > 0 else position.y + safe_distance))
 		

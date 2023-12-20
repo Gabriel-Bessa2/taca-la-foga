@@ -1,12 +1,268 @@
-[gd_scene load_steps=5 format=3 uid="uid://dph4bjrdf2s56"]
+[gd_scene load_steps=18 format=3 uid="uid://dph4bjrdf2s56"]
 
 [ext_resource type="Script" path="res://Enemies/Moleque do Olho Roxo/MolequeOlhoRoxo.gd" id="1_6x1c4"]
 [ext_resource type="Texture2D" uid="uid://bwen7puonvdjj" path="res://icon.svg" id="2_xeo8y"]
+[ext_resource type="Texture2D" uid="uid://d34pi67suw88q" path="res://player/flamethrower/fire-Sheet.png" id="3_4b7as"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gb64u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rvuer"]
 size = Vector2(15, 28)
+
+[sub_resource type="Animation" id="Animation_oyivf"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitArea:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitArea:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_f3r6w"]
+resource_name = "atck"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [8, 9, 8]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_attack"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitArea:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitArea:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"aim_at_player"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_perqj"]
+resource_name = "hurt"
+length = 2.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0],
+"method": &"change_state"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [4, 7, 4, 7, 4, 7, 4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitArea:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitArea:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_e0iuo"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_88e1n"]
+resource_name = "walk"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ybfm7"]
+_data = {
+"RESET": SubResource("Animation_oyivf"),
+"atck": SubResource("Animation_f3r6w"),
+"hurt": SubResource("Animation_perqj"),
+"idle": SubResource("Animation_e0iuo"),
+"walk": SubResource("Animation_88e1n")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oc4ud"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_g4vco"]
+offsets = PackedFloat32Array(0, 0.294118, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.298039, 0, 1, 0.180392, 0.0784314, 0.352941, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_akr0l"]
+gradient = SubResource("Gradient_g4vco")
+
+[sub_resource type="Curve" id="Curve_tvbhb"]
+_data = [Vector2(0.05, 0), 0.0, 0.0, 0, 0, Vector2(0.107143, 1), 0.0880503, 0.0880503, 0, 0, Vector2(1, 0), -0.0433035, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_yxb2x"]
+curve = SubResource("Curve_tvbhb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q1php"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_yxb2x")
+color_ramp = SubResource("GradientTexture1D_akr0l")
 
 [node name="MoloqueOlhoRoxo" type="CharacterBody2D"]
 motion_mode = 1
@@ -31,12 +287,17 @@ max_neighbors = 1
 avoidance_layers = 0
 debug_enabled = true
 
-[node name="Timer" type="Timer" parent="."]
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="ImmunityTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
 
 [node name="HitArea" type="Area2D" parent="."]
 visible = false
+monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
 position = Vector2(18.5, 0)
@@ -48,5 +309,17 @@ position = Vector2(18.5, -9.53674e-07)
 scale = Vector2(0.117187, 0.21875)
 texture = ExtResource("2_xeo8y")
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ybfm7")
+}
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_oc4ud")
+emitting = false
+amount = 17
+process_material = SubResource("ParticleProcessMaterial_q1php")
+texture = ExtResource("3_4b7as")
+
+[connection signal="timeout" from="ImmunityTimer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
