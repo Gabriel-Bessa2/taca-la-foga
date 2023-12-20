@@ -20,4 +20,5 @@ func _on_body_entered(body):
 	if(body is Player):
 		body.gethit(damage)
 		_destroy()
-# Replace with function body.
+	elif(body is TileMap):
+		_destroy()
