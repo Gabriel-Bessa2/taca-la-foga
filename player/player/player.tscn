@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://bql0nqi4l7dw3"]
+[gd_scene load_steps=12 format=3 uid="uid://bql0nqi4l7dw3"]
 
 [ext_resource type="Script" path="res://player/player/player.gd" id="1_bu8vp"]
 [ext_resource type="Texture2D" uid="uid://dk2uhic5ibiyn" path="res://player/player-sprite-sheet.png" id="2_skmtw"]
+[ext_resource type="Script" path="res://player/player/Vida.gd" id="5_6prfn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i62y1"]
 radius = 4.0
@@ -158,3 +159,23 @@ vframes = 4
 libraries = {
 "": SubResource("AnimationLibrary_4lnpg")
 }
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Vida" type="ColorRect" parent="HUD"]
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 90.0
+offset_bottom = 17.0
+color = Color(0.423529, 0.423529, 0.423529, 0.894118)
+script = ExtResource("5_6prfn")
+
+[node name="bar" type="ColorRect" parent="HUD/Vida"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 73.0
+offset_bottom = 8.0
+color = Color(0, 0.996078, 0.376471, 1)
+
+[connection signal="hp_changed" from="." to="HUD/Vida" method="_on_player_hp_changed"]
