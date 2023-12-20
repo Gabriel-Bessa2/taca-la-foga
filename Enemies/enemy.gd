@@ -103,5 +103,5 @@ func damage(damageTaken: int):
 	
 	if health == 0:
 		change_state("dead")
-	else:
+	elif !isAttacking:
 		change_state("hurt")

@@ -12,9 +12,13 @@ extends CharacterBody2D
 @export var WALK_ACCELERATION: float = 0.2
 
 enum PLAYER_STATES {MOVE, FIRE, CASH, HURT, DEAD}
-const HP_MAX: float = 10.0
 var state: PLAYER_STATES = PLAYER_STATES.MOVE
+
+const HP_MAX: float = 10.0
 var hp: float = HP_MAX
+
+@onready var immunityTimer: Timer = $immunityTimer
+var immune: bool = false
 
 var inputDirection: Vector2 = Vector2.ZERO
 var inputFlamethrower: bool = false
@@ -27,6 +31,14 @@ signal max_hp_signal
 
 func _physics_process(_delta):
 	get_input()
+	
+	if immune:
+		if randi() % 2 == 1:
+			Sprite.modulate = Color(0,0,1)
+		else:
+			Sprite.modulate = Color(0,1,1)
+	else:
+		Sprite.modulate = Color(1,1,1)
 	
 	match state:
 		PLAYER_STATES.MOVE:
@@ -88,6 +100,9 @@ func gethit(damage: int):
 	if hp == 0:
 		AnimPlayer.play("dead")
 		state = PLAYER_STATES.DEAD
+	else:
+		immune = true
+		immunityTimer.start()
 
 
 func _on_death_reset_timer_timeout():
