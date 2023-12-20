@@ -6,7 +6,7 @@ extends Hitbox
 var direction : Vector2
 
 func _ready():
-	damage = 1
+	damage = 10
 	knockback = 1
 	direction += Vector2(randf_range(-0.1, 0.1), randf_range(-0.1, 0.1))
 	animPlayer.play("default")

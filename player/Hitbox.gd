@@ -6,5 +6,6 @@ extends Area2D
 
 func enemy_collided(body):
 	if body is Enemy:
-		body.velocity = knockback*(body.position - position)
-		body.damage(damage)
+		if !body.immune:
+			body.velocity = knockback*(body.position - position)
+			body.damage(damage)
