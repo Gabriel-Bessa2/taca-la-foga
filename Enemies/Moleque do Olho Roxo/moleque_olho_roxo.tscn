@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://dph4bjrdf2s56"]
+[gd_scene load_steps=19 format=3 uid="uid://dph4bjrdf2s56"]
 
 [ext_resource type="Script" path="res://Enemies/Moleque do Olho Roxo/MolequeOlhoRoxo.gd" id="1_6x1c4"]
+[ext_resource type="PackedScene" uid="uid://beg3l1prf1o54" path="res://Enemies/Moleque do Olho Roxo/bullet.tscn" id="2_56fn7"]
 [ext_resource type="Texture2D" uid="uid://bwen7puonvdjj" path="res://icon.svg" id="2_xeo8y"]
 [ext_resource type="Texture2D" uid="uid://d34pi67suw88q" path="res://player/flamethrower/fire-Sheet.png" id="3_4b7as"]
 
@@ -81,9 +82,12 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"_shoot"
+}, {
 "args": [],
 "method": &"end_attack"
 }]
@@ -265,10 +269,12 @@ scale_curve = SubResource("CurveTexture_yxb2x")
 color_ramp = SubResource("GradientTexture1D_akr0l")
 
 [node name="MoloqueOlhoRoxo" type="CharacterBody2D"]
+collision_layer = 2
 motion_mode = 1
 slide_on_ceiling = false
 wall_min_slide_angle = 0.0
 script = ExtResource("1_6x1c4")
+ammo = ExtResource("2_56fn7")
 attack_range = 90.0
 flee_range = 70.0
 
@@ -288,11 +294,11 @@ avoidance_layers = 0
 debug_enabled = true
 
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.4
 one_shot = true
 
 [node name="ImmunityTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 2.0
 one_shot = true
 
 [node name="HitArea" type="Area2D" parent="."]
@@ -313,6 +319,7 @@ texture = ExtResource("2_xeo8y")
 libraries = {
 "": SubResource("AnimationLibrary_ybfm7")
 }
+speed_scale = 0.3
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_oc4ud")
@@ -321,5 +328,9 @@ amount = 17
 process_material = SubResource("ParticleProcessMaterial_q1php")
 texture = ExtResource("3_4b7as")
 
-[connection signal="timeout" from="ImmunityTimer" to="." method="_on_timer_timeout"]
+[node name="RayCast2D" type="RayCast2D" parent="."]
+collision_mask = 3
+
+[connection signal="timeout" from="AttackTimer" to="." method="attack_cooldown_out"]
+[connection signal="timeout" from="ImmunityTimer" to="." method="immunity_timeout"]
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]

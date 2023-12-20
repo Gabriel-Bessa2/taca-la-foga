@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://beg3l1prf1o54"]
+
+[ext_resource type="Script" path="res://Enemies/Moleque do Olho Roxo/bullet.gd" id="1_6h4ji"]
+[ext_resource type="Texture2D" uid="uid://bwen7puonvdjj" path="res://icon.svg" id="2_hlauh"]
+
+[node name="Bullet" type="Area2D"]
+script = ExtResource("1_6h4ji")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.144531, 0.144531)
+texture = ExtResource("2_hlauh")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_screen_exited"]

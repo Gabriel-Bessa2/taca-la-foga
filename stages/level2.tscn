@@ -1,10 +1,11 @@
-[gd_scene load_steps=46 format=3 uid="uid://b7m7ob8qy33a7"]
+[gd_scene load_steps=47 format=3 uid="uid://b7m7ob8qy33a7"]
 
 [ext_resource type="Texture2D" uid="uid://dwri6maajsw23" path="res://stages/parede_beco.png" id="1_jpsmo"]
 [ext_resource type="Texture2D" uid="uid://bg8rik2k2chvl" path="res://stages/piso_beco.png" id="2_s5sgi"]
 [ext_resource type="PackedScene" uid="uid://bql0nqi4l7dw3" path="res://player/player/player.tscn" id="3_fb2tx"]
 [ext_resource type="PackedScene" uid="uid://cuwpswg1go8v6" path="res://stages/camera/camera.tscn" id="4_whldw"]
 [ext_resource type="PackedScene" uid="uid://bg4at2sl2np05" path="res://Enemies/mano guarda/mano_guarda.tscn" id="5_ys1m0"]
+[ext_resource type="PackedScene" uid="uid://dph4bjrdf2s56" path="res://Enemies/Moleque do Olho Roxo/moleque_olho_roxo.tscn" id="6_iac62"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_24ral"]
 texture = ExtResource("1_jpsmo")
@@ -687,4 +688,8 @@ player = NodePath("../Player")
 
 [node name="TestEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_ys1m0")]
 position = Vector2(332, 240)
+target = NodePath("../Player")
+
+[node name="MoloqueOlhoRoxo" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_iac62")]
+position = Vector2(347, 293)
 target = NodePath("../Player")
