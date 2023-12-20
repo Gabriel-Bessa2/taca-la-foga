@@ -1,8 +1,9 @@
-[gd_scene load_steps=26 format=3 uid="uid://dkjmo6hinji4c"]
+[gd_scene load_steps=27 format=3 uid="uid://dkjmo6hinji4c"]
 
 [ext_resource type="Texture2D" uid="uid://tuuy7334u3xj" path="res://stages/parede1_v2.png" id="2_52cpl"]
 [ext_resource type="Texture2D" uid="uid://l3junmc820sc" path="res://stages/backgroud.png" id="2_svlc8"]
 [ext_resource type="PackedScene" uid="uid://bql0nqi4l7dw3" path="res://player/player/player.tscn" id="3_8qqiq"]
+[ext_resource type="FontFile" uid="uid://d4f2qwtddl20s" path="res://Peepo.ttf" id="3_583hr"]
 [ext_resource type="PackedScene" uid="uid://bg4at2sl2np05" path="res://Enemies/mano guarda/mano_guarda.tscn" id="4_r5psh"]
 [ext_resource type="PackedScene" uid="uid://cuwpswg1go8v6" path="res://stages/camera/camera.tscn" id="5_kl8c4"]
 
@@ -408,7 +409,8 @@ offset_left = 128.0
 offset_top = 144.0
 offset_right = 256.0
 offset_bottom = 272.0
-theme_override_font_sizes/font_size = 9
+theme_override_fonts/font = ExtResource("3_583hr")
+theme_override_font_sizes/font_size = 8
 text = "Pressione \"Espaço\" para Disparar o Lança Chamas"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -419,7 +421,8 @@ offset_left = 256.0
 offset_top = 144.0
 offset_right = 480.0
 offset_bottom = 272.0
-theme_override_font_sizes/font_size = 9
+theme_override_fonts/font = ExtResource("3_583hr")
+theme_override_font_sizes/font_size = 8
 text = "Pressione o \"X\" para Realizar o Parry"
 horizontal_alignment = 1
 vertical_alignment = 1
