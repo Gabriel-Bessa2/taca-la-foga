@@ -144,7 +144,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(2),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [0],
+"args": ["idle"],
 "method": &"change_state"
 }]
 }

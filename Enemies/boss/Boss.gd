@@ -12,35 +12,42 @@ func _physics_process(_delta):
 	var player_distance = position.distance_to(target.position)
 	
 	match current_state:
-		ENEMY_STATES.IDLE:
+		"idle":
 			velocity = Vector2.ZERO
 			animPlayer.play("idle")
 			
 			if(player_distance < sight_range):
-				change_state(ENEMY_STATES.FOLLOWING)
-		ENEMY_STATES.FOLLOWING:
+				change_state("follow")
+			
+		"follow":
 			handle_navigation()
 			animPlayer.play("walk")
 			
 			if canAttack:
 				if player_distance > 20:
-					change_state(ENEMY_STATES.DASH)
+					change_state("dash")
 				else:
-					change_state(ENEMY_STATES.ATTACKING)
-		ENEMY_STATES.DEAD:
+					change_state("attack")
+				
+		"dead":
 			queue_free()
-		ENEMY_STATES.HURT:
-			change_state(ENEMY_STATES.IDLE)
-		ENEMY_STATES.ATTACKING:
+			
+		"hurt":
+			change_state("idle")
+			
+		"attack":
 			velocity = Vector2.ZERO
 			animPlayer.play("atck")
-		ENEMY_STATES.DASH:
+			
+		"dash":
 			animPlayer.play("dash")
 			if animPlayer.current_animation_position < 0.7:
 				velocity = Vector2.ZERO
 				aim_at_player()
 			elif animPlayer.current_animation_position == 0.7:
 				velocity = position.direction_to(target.position)*speed*2
+	
+	super(_delta)
 
 func _on_hit_area_body_entered(body):
 	if(body is Player):

@@ -12,9 +12,10 @@ var moneyMultiplier: int = 1
 var isAttacking: bool = false
 var canAttack: bool = true
 
-#state machine
-enum ENEMY_STATES {IDLE, FOLLOWING, DEAD, HURT, LOAD_ATTACK, ATTACKING}
-var current_state: ENEMY_STATES
+##state machine
+#enum ENEMY_STATES {IDLE, FOLLOWING, DEAD, HURT, LOAD_ATTACK, ATTACKING}
+#var current_state: ENEMY_STATES
+var current_state: String
 
 #movement
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
@@ -28,59 +29,59 @@ var current_state: ENEMY_STATES
 var immune: bool = false
 
 func _ready():
-	current_state = ENEMY_STATES.IDLE
+	current_state = "idle"
 	navigation_agent.path_desired_distance = attack_range
 	navigation_agent.target_desired_distance = attack_range
 
-func _process(_delta):
-	match current_state:
-		ENEMY_STATES.IDLE:
-			pass
-		ENEMY_STATES.FOLLOWING:
-			pass
-		ENEMY_STATES.DEAD:
-			pass
-		ENEMY_STATES.HURT:
-			pass
-		ENEMY_STATES.ATTACKING:
-			pass
+#func _process(_delta):
+	#match current_state:
+		#ENEMY_STATES.IDLE:
+			#pass
+		#ENEMY_STATES.FOLLOWING:
+			#pass
+		#ENEMY_STATES.DEAD:
+			#pass
+		#ENEMY_STATES.HURT:
+			#pass
+		#ENEMY_STATES.ATTACKING:
+			#pass
 
 func _physics_process(_delta):
-	var player_distance = position.distance_to(target.position)
-	#print(current_state)
-	
-	match current_state:
-		ENEMY_STATES.IDLE:
-			velocity = Vector2.ZERO
-			
-			if(player_distance < sight_range and player_distance <= attack_range and canAttack && flee_range == -1):
-				change_state(ENEMY_STATES.ATTACKING)
-			elif(player_distance < sight_range):
-				change_state(ENEMY_STATES.FOLLOWING)
-		
-		ENEMY_STATES.FOLLOWING:
-			handle_navigation()
-			
-			if(player_distance < sight_range and player_distance <= attack_range and canAttack && flee_range == -1):
-				change_state(ENEMY_STATES.ATTACKING)
-			elif(player_distance < sight_range and player_distance <= attack_range):
-				change_state(ENEMY_STATES.IDLE)
-		ENEMY_STATES.DEAD:
-			velocity = Vector2.ZERO
-			
-		ENEMY_STATES.HURT:
-			pass
-		ENEMY_STATES.ATTACKING:
-			pass
-	
+	#var player_distance = position.distance_to(target.position)
+	##print(current_state)
+	#
+	#match current_state:
+		#ENEMY_STATES.IDLE:
+			#velocity = Vector2.ZERO
+			#
+			#if(player_distance < sight_range and player_distance <= attack_range and canAttack && flee_range == -1):
+				#change_state(ENEMY_STATES.ATTACKING)
+			#elif(player_distance < sight_range):
+				#change_state(ENEMY_STATES.FOLLOWING)
+		#
+		#ENEMY_STATES.FOLLOWING:
+			#handle_navigation()
+			#
+			#if(player_distance < sight_range and player_distance <= attack_range and canAttack && flee_range == -1):
+				#change_state(ENEMY_STATES.ATTACKING)
+			#elif(player_distance < sight_range and player_distance <= attack_range):
+				#change_state(ENEMY_STATES.IDLE)
+		#ENEMY_STATES.DEAD:
+			#velocity = Vector2.ZERO
+			#
+		#ENEMY_STATES.HURT:
+			#pass
+		#ENEMY_STATES.ATTACKING:
+			#pass
+	#
 	move_and_slide()
 
 func handle_navigation() -> void:
 	call_deferred("actor_setup")
 	#print(navigation_agent.is_navigation_finished())
-	if (navigation_agent.is_navigation_finished() && flee_range != -1):
-		change_state(ENEMY_STATES.ATTACKING)
-		
+	#if (navigation_agent.is_navigation_finished() && flee_range != -1):
+		#change_state(ENEMY_STATES.ATTACKING)
+		#
 	if (!navigation_agent.is_navigation_finished()):
 		print("a2")
 		var current_agent_position: Vector2 = global_position
@@ -115,9 +116,9 @@ func end_attack():
 	canAttack = false
 	isAttacking = false
 	attackTimer.start()
-	current_state = ENEMY_STATES.IDLE
+	current_state = "idle"
 
-func change_state(stateToChange: ENEMY_STATES):
+func change_state(stateToChange: String):
 	current_state = stateToChange
 
 func aim_at_player():
@@ -135,6 +136,6 @@ func damage(damageTaken: int):
 	immunityTimer.start()
 	
 	if health == 0:
-		change_state(ENEMY_STATES.DEAD)
+		change_state("dead")
 	else:
-		change_state(ENEMY_STATES.HURT)
+		change_state("hurt")

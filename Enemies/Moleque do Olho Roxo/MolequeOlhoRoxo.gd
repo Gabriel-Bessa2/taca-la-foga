@@ -9,57 +9,54 @@ extends Enemy
  
 @export var ammo : PackedScene
 
-
 func _ready():
 	super()
 	health = 100
 	moneyDrop = 10
 	
-	
-func _physics_process(delta):
-	
+func _physics_process(_delta):
 	var player_distance = position.distance_to(target.position)
-	#print(current_state)
-	raycast_2d.target_position = to_local(target.position)			
+	raycast_2d.target_position = to_local(target.position)
+	
 	match current_state:
-		ENEMY_STATES.IDLE:
+		"idle":
 			animPlayer.play("idle")
 			velocity = Vector2.ZERO
 			
 			if(player_distance < sight_range and raycast_2d.get_collider() == target 
 											 and attack_time.is_stopped() 
 											 and canAttack):
-				change_state(ENEMY_STATES.ATTACKING)
+				change_state("attack")
 			elif(player_distance < sight_range):
-				change_state(ENEMY_STATES.FOLLOWING)
+				change_state("follow")
 		
-		ENEMY_STATES.FOLLOWING:
+		"follow":
 			animPlayer.play("walk")
 			handle_navigation()
 			
 			if(player_distance < sight_range and raycast_2d.get_collider() == target 
 											 and attack_time.is_stopped()
 											 and canAttack):
-				change_state(ENEMY_STATES.ATTACKING)
+				change_state("attack")
 			elif(player_distance < sight_range and player_distance <= attack_range):
-				change_state(ENEMY_STATES.IDLE)
-		ENEMY_STATES.DEAD:
+				change_state("idle")
+			
+		"dead":
 			queue_free()
 			velocity = Vector2.ZERO
 			
-		ENEMY_STATES.HURT:
-			animPlayer.play("hurt")	
+		"hurt":
+			animPlayer.play("hurt")
 			if randi() % 15 == 1:
 				velocity = speed*Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
-				look_at(position + velocity)		
-		ENEMY_STATES.ATTACKING:
-			animPlayer.play("atck")			
-			velocity = Vector2.ZERO		
-			isAttacking = true	
+				look_at(position + velocity)
+				
+		"attack":
+			animPlayer.play("atck")
+			velocity = Vector2.ZERO
+			isAttacking = true
 			
-			
-	
-	move_and_slide()
+	super(_delta)
 			
 func _shoot():
 	var bullet = ammo.instantiate()
