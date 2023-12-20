@@ -403,19 +403,6 @@ navigation_polygon = SubResource("NavigationPolygon_nd1vq")
 [node name="NavigationRegion2D15" type="NavigationRegion2D" parent="Map"]
 navigation_polygon = SubResource("NavigationPolygon_5m0er")
 
-[node name="Player" parent="." instance=ExtResource("3_8qqiq")]
-position = Vector2(156, 225)
-
-[node name="Camera" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_kl8c4")]
-position = Vector2(345, 257)
-limit_width = 896
-limit_height = 416
-player = NodePath("../Player")
-
-[node name="TestEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_r5psh")]
-position = Vector2(344, 209)
-target = NodePath("../Player")
-
 [node name="Label" type="Label" parent="."]
 offset_left = 128.0
 offset_top = 144.0
@@ -437,3 +424,16 @@ text = "Pressione o \"X\" para Realizar o Parry"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="Player" parent="." instance=ExtResource("3_8qqiq")]
+position = Vector2(156, 225)
+
+[node name="Camera" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_kl8c4")]
+position = Vector2(345, 257)
+limit_width = 896
+limit_height = 416
+player = NodePath("../Player")
+
+[node name="TestEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_r5psh")]
+position = Vector2(344, 209)
+target = NodePath("../Player")
