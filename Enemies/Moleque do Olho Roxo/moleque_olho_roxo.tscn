@@ -1,12 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://bg4at2sl2np05"]
+[gd_scene load_steps=18 format=3 uid="uid://dph4bjrdf2s56"]
 
-[ext_resource type="Script" path="res://Enemies/mano guarda/ManoGuarda.gd" id="1_i1nf0"]
-[ext_resource type="Texture2D" uid="uid://dk2uhic5ibiyn" path="res://player/player-sprite-sheet.png" id="2_iwrti"]
-[ext_resource type="Texture2D" uid="uid://bwen7puonvdjj" path="res://icon.svg" id="2_wbqwk"]
-[ext_resource type="Texture2D" uid="uid://d34pi67suw88q" path="res://player/flamethrower/fire-Sheet.png" id="4_xa33d"]
+[ext_resource type="Script" path="res://Enemies/Moleque do Olho Roxo/MolequeOlhoRoxo.gd" id="1_6x1c4"]
+[ext_resource type="Texture2D" uid="uid://bwen7puonvdjj" path="res://icon.svg" id="2_xeo8y"]
+[ext_resource type="Texture2D" uid="uid://d34pi67suw88q" path="res://player/flamethrower/fire-Sheet.png" id="3_4b7as"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gb64u"]
-radius = 7.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rvuer"]
 size = Vector2(15, 28)
@@ -236,24 +234,24 @@ _data = {
 "walk": SubResource("Animation_88e1n")
 }
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_usgv4"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_oc4ud"]
 blend_mode = 1
 
-[sub_resource type="Gradient" id="Gradient_dr7gl"]
+[sub_resource type="Gradient" id="Gradient_g4vco"]
 offsets = PackedFloat32Array(0, 0.294118, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 0.298039, 0, 1, 0.180392, 0.0784314, 0.352941, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_plkmo"]
-gradient = SubResource("Gradient_dr7gl")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_akr0l"]
+gradient = SubResource("Gradient_g4vco")
 
-[sub_resource type="Curve" id="Curve_lb4rg"]
+[sub_resource type="Curve" id="Curve_tvbhb"]
 _data = [Vector2(0.05, 0), 0.0, 0.0, 0, 0, Vector2(0.107143, 1), 0.0880503, 0.0880503, 0, 0, Vector2(1, 0), -0.0433035, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_sef1a"]
-curve = SubResource("Curve_lb4rg")
+[sub_resource type="CurveTexture" id="CurveTexture_yxb2x"]
+curve = SubResource("Curve_tvbhb")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_67mxk"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q1php"]
 particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 10.0
@@ -263,25 +261,30 @@ initial_velocity_min = 5.0
 initial_velocity_max = 10.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.5
-scale_curve = SubResource("CurveTexture_sef1a")
-color_ramp = SubResource("GradientTexture1D_plkmo")
+scale_curve = SubResource("CurveTexture_yxb2x")
+color_ramp = SubResource("GradientTexture1D_akr0l")
 
-[node name="ManoGuarda" type="CharacterBody2D"]
+[node name="MoloqueOlhoRoxo" type="CharacterBody2D"]
 motion_mode = 1
 slide_on_ceiling = false
 wall_min_slide_angle = 0.0
-script = ExtResource("1_i1nf0")
+script = ExtResource("1_6x1c4")
+attack_range = 90.0
+flee_range = 70.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gb64u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
-texture = ExtResource("2_iwrti")
-hframes = 4
-vframes = 4
+rotation = 3.14159
+scale = Vector2(0.109375, 0.109375)
+texture = ExtResource("2_xeo8y")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+avoidance_enabled = true
+max_neighbors = 1
+avoidance_layers = 0
 debug_enabled = true
 
 [node name="AttackTimer" type="Timer" parent="."]
@@ -289,7 +292,8 @@ wait_time = 0.2
 one_shot = true
 
 [node name="ImmunityTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 0.2
+one_shot = true
 
 [node name="HitArea" type="Area2D" parent="."]
 visible = false
@@ -303,7 +307,7 @@ shape = SubResource("RectangleShape2D_rvuer")
 modulate = Color(0.639216, 0.0666667, 0.0313726, 1)
 position = Vector2(18.5, -9.53674e-07)
 scale = Vector2(0.117187, 0.21875)
-texture = ExtResource("2_wbqwk")
+texture = ExtResource("2_xeo8y")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -311,12 +315,11 @@ libraries = {
 }
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-material = SubResource("CanvasItemMaterial_usgv4")
+material = SubResource("CanvasItemMaterial_oc4ud")
 emitting = false
 amount = 17
-process_material = SubResource("ParticleProcessMaterial_67mxk")
-texture = ExtResource("4_xa33d")
+process_material = SubResource("ParticleProcessMaterial_q1php")
+texture = ExtResource("3_4b7as")
 
-[connection signal="timeout" from="AttackTimer" to="." method="attack_cooldown_out"]
-[connection signal="timeout" from="ImmunityTimer" to="." method="immunity_timeout"]
+[connection signal="timeout" from="ImmunityTimer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]
