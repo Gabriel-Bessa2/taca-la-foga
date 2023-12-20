@@ -346,19 +346,6 @@ agent_radius = 0.0
 
 [node name="level1" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("3_8qqiq")]
-position = Vector2(156, 225)
-
-[node name="Camera" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_kl8c4")]
-position = Vector2(345, 257)
-limit_width = 896
-limit_height = 416
-player = NodePath("../Player")
-
-[node name="TestEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_r5psh")]
-position = Vector2(344, 209)
-target = NodePath("../Player")
-
 [node name="Map" type="Node2D" parent="."]
 
 [node name="TileMap" type="TileMap" parent="Map" groups=["navigation"]]
@@ -415,3 +402,38 @@ navigation_polygon = SubResource("NavigationPolygon_nd1vq")
 
 [node name="NavigationRegion2D15" type="NavigationRegion2D" parent="Map"]
 navigation_polygon = SubResource("NavigationPolygon_5m0er")
+
+[node name="Player" parent="." instance=ExtResource("3_8qqiq")]
+position = Vector2(156, 225)
+
+[node name="Camera" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_kl8c4")]
+position = Vector2(345, 257)
+limit_width = 896
+limit_height = 416
+player = NodePath("../Player")
+
+[node name="TestEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_r5psh")]
+position = Vector2(344, 209)
+target = NodePath("../Player")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 128.0
+offset_top = 144.0
+offset_right = 256.0
+offset_bottom = 272.0
+theme_override_font_sizes/font_size = 9
+text = "Pressione \"Espaço\" para Disparar o Lança Chamas"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 256.0
+offset_top = 144.0
+offset_right = 480.0
+offset_bottom = 272.0
+theme_override_font_sizes/font_size = 9
+text = "Pressione o \"X\" para Realizar o Parry"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
