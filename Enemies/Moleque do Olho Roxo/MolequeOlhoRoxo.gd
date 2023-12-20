@@ -47,6 +47,7 @@ func _physics_process(_delta):
 			
 		"hurt":
 			animPlayer.play("hurt")
+			print_debug("ai ai ai")
 			if randi() % 15 == 1:
 				velocity = speed*Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 				look_at(position + velocity)
@@ -57,7 +58,7 @@ func _physics_process(_delta):
 			isAttacking = true
 			
 	super(_delta)
-			
+	
 func _shoot():
 	var bullet = ammo.instantiate()
 	bullet.position = position
@@ -65,6 +66,3 @@ func _shoot():
 	bullet.target = target
 	bullet.damage = 4
 	get_tree().current_scene.add_child(bullet)
-
-
-

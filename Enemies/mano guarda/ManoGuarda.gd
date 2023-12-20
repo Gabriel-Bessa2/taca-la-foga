@@ -5,10 +5,6 @@ extends Enemy
 @onready var sprite_2d = $HitArea/Sprite2D
 @onready var animPlayer: AnimationPlayer = $AnimationPlayer
 
-#state machine
-#enum ENEMY_STATES {IDLE, FOLLOWING, DEAD, HURT, LOAD_ATTACK, ATTACKING}
-#var current_state: ENEMY_STATES
-
 func _ready():
 	super()
 	health = 100

@@ -13,8 +13,6 @@ var isAttacking: bool = false
 var canAttack: bool = true
 
 ##state machine
-#enum ENEMY_STATES {IDLE, FOLLOWING, DEAD, HURT, LOAD_ATTACK, ATTACKING}
-#var current_state: ENEMY_STATES
 var current_state: String
 
 #movement
@@ -33,47 +31,7 @@ func _ready():
 	navigation_agent.path_desired_distance = attack_range
 	navigation_agent.target_desired_distance = attack_range
 
-#func _process(_delta):
-	#match current_state:
-		#ENEMY_STATES.IDLE:
-			#pass
-		#ENEMY_STATES.FOLLOWING:
-			#pass
-		#ENEMY_STATES.DEAD:
-			#pass
-		#ENEMY_STATES.HURT:
-			#pass
-		#ENEMY_STATES.ATTACKING:
-			#pass
-
 func _physics_process(_delta):
-	#var player_distance = position.distance_to(target.position)
-	##print(current_state)
-	#
-	#match current_state:
-		#ENEMY_STATES.IDLE:
-			#velocity = Vector2.ZERO
-			#
-			#if(player_distance < sight_range and player_distance <= attack_range and canAttack && flee_range == -1):
-				#change_state(ENEMY_STATES.ATTACKING)
-			#elif(player_distance < sight_range):
-				#change_state(ENEMY_STATES.FOLLOWING)
-		#
-		#ENEMY_STATES.FOLLOWING:
-			#handle_navigation()
-			#
-			#if(player_distance < sight_range and player_distance <= attack_range and canAttack && flee_range == -1):
-				#change_state(ENEMY_STATES.ATTACKING)
-			#elif(player_distance < sight_range and player_distance <= attack_range):
-				#change_state(ENEMY_STATES.IDLE)
-		#ENEMY_STATES.DEAD:
-			#velocity = Vector2.ZERO
-			#
-		#ENEMY_STATES.HURT:
-			#pass
-		#ENEMY_STATES.ATTACKING:
-			#pass
-	#
 	move_and_slide()
 
 func handle_navigation() -> void:
