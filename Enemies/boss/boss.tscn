@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://bboix8l8j30s1"]
 
 [ext_resource type="Script" path="res://Enemies/boss/Boss.gd" id="1_xtp08"]
-[ext_resource type="Texture2D" uid="uid://dk2uhic5ibiyn" path="res://player/player-sprite-sheet.png" id="2_ssc6y"]
+[ext_resource type="Texture2D" uid="uid://cay4m8opgdl7c" path="res://Enemies/boss/chefe-Sheet.png" id="2_ncfon"]
 
 [sub_resource type="Animation" id="Animation_wjes3"]
 length = 0.001
@@ -32,6 +32,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_w0dc3"]
 resource_name = "atck"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -39,10 +40,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [8, 9, 8]
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [8, 11]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -51,7 +52,7 @@ tracks/1/path = NodePath("..")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -68,7 +69,7 @@ tracks/2/path = NodePath("../HitArea:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.8),
+"times": PackedFloat32Array(0, 0.3, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -84,10 +85,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.7, 0.9, 1.1, 1.3, 1.5, 1.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.3, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9),
+"transitions": PackedFloat32Array(1, 1, 300, 300, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [8, 8, 4, 7, 4, 7, 4, 7]
+"values": [8, 9, 9, 17, 16, 17, 16, 17, 16, 17, 16, 17, 16, 17, 16]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -118,6 +119,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_1m4li"]
 resource_name = "idle"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -125,10 +127,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0]
+"values": [12, 14]
 }
 
 [sub_resource type="Animation" id="Animation_alb32"]
@@ -160,7 +162,7 @@ _data = {
 radius = 7.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b2ew1"]
-size = Vector2(24, 14)
+size = Vector2(15, 22)
 
 [node name="Boss" type="CharacterBody2D"]
 script = ExtResource("1_xtp08")
@@ -173,10 +175,11 @@ wait_time = 0.2
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
-texture = ExtResource("2_ssc6y")
+modulate = Color(0, 0, 0, 1)
+rotation = 3.14159
+texture = ExtResource("2_ncfon")
 hframes = 4
-vframes = 4
+vframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
@@ -191,7 +194,9 @@ shape = SubResource("CircleShape2D_vrhm1")
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
-position = Vector2(12, 0)
+position = Vector2(7.5, 0)
 shape = SubResource("RectangleShape2D_b2ew1")
 
+[connection signal="timeout" from="AttackTimer" to="." method="attack_cooldown_out"]
+[connection signal="timeout" from="ImmunityTimer" to="." method="immunity_timeout"]
 [connection signal="body_entered" from="HitArea" to="." method="_on_hit_area_body_entered"]

@@ -1,22 +1,32 @@
 class_name Boss
 extends Enemy
 
+var start: bool = true
+var playerDirection: Vector2
+
 @onready var animPlayer: AnimationPlayer = $AnimationPlayer
 
 func _ready():
 	super()
-	health = 500
+	health = 200
 	moneyDrop = 10
+	attack_range = 19
 	
 func _physics_process(_delta):
-	var player_distance = position.distance_to(target.position)
+	var player_distance: float = position.distance_to(target.position)
+	
+	if current_state == "attack" or current_state == "dash":
+		isAttacking = true
+	else:
+		isAttacking = false
 	
 	match current_state:
 		"idle":
 			velocity = Vector2.ZERO
 			animPlayer.play("idle")
 			
-			if(player_distance < sight_range):
+			if(player_distance < sight_range or start):
+				start = true
 				change_state("follow")
 			
 		"follow":
@@ -43,12 +53,15 @@ func _physics_process(_delta):
 			animPlayer.play("dash")
 			if animPlayer.current_animation_position < 0.7:
 				velocity = Vector2.ZERO
+				playerDirection = position.direction_to(target.position)
 				aim_at_player()
-			elif animPlayer.current_animation_position == 0.7:
-				velocity = position.direction_to(target.position)*speed*2
+			else:
+				velocity = playerDirection * speed * 3
 	
 	super(_delta)
 
 func _on_hit_area_body_entered(body):
 	if(body is Player):
 		body.gethit(dmg)
+		if current_state == "dash":
+			change_state("idle")

@@ -9,9 +9,13 @@ func _ready():
 	super()
 	health = 100
 	moneyDrop = 10
+	attack_range = 16
 
 func _physics_process(_delta):
 	var player_distance = position.distance_to(target.position)
+	
+	if current_state != "attack":
+		isAttacking = false
 	
 	match current_state:
 		"idle":

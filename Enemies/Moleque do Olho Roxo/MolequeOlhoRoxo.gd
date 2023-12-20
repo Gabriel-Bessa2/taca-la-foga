@@ -18,6 +18,9 @@ func _physics_process(_delta):
 	var player_distance = position.distance_to(target.position)
 	raycast_2d.target_position = to_local(target.position)
 	
+	if current_state != "attack":
+		isAttacking = false
+	
 	match current_state:
 		"idle":
 			animPlayer.play("idle")
@@ -54,6 +57,7 @@ func _physics_process(_delta):
 				
 		"attack":
 			animPlayer.play("atck")
+			aim_at_player()
 			velocity = Vector2.ZERO
 			isAttacking = true
 			

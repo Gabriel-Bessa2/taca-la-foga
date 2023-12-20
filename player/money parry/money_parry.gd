@@ -12,7 +12,5 @@ func _destroy_timer():
 func enemy_collided(Body):
 	if Body is Enemy:
 		if Body.isAttacking:
-			damage *= 2
+			super.enemy_collided(Body)
 			Body.moneyMultiplier = min(Body.moneyMultiplier + 1, 4)
-			
-		super.enemy_collided(Body)

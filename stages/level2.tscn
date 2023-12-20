@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bg8rik2k2chvl" path="res://stages/piso_beco.png" id="2_s5sgi"]
 [ext_resource type="PackedScene" uid="uid://bql0nqi4l7dw3" path="res://player/player/player.tscn" id="3_fb2tx"]
 [ext_resource type="PackedScene" uid="uid://cuwpswg1go8v6" path="res://stages/camera/camera.tscn" id="4_whldw"]
-[ext_resource type="PackedScene" uid="uid://dph4bjrdf2s56" path="res://Enemies/Moleque do Olho Roxo/moleque_olho_roxo.tscn" id="6_iac62"]
+[ext_resource type="PackedScene" uid="uid://bboix8l8j30s1" path="res://Enemies/boss/boss.tscn" id="5_dyk2h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_24ral"]
 texture = ExtResource("1_jpsmo")
@@ -685,6 +685,6 @@ limit_width = 752
 limit_height = 720
 player = NodePath("../Player")
 
-[node name="MoloqueOlhoRoxo" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_iac62")]
-position = Vector2(347, 293)
+[node name="Boss" parent="." node_paths=PackedStringArray("target") instance=ExtResource("5_dyk2h")]
+position = Vector2(310, 363)
 target = NodePath("../Player")

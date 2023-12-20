@@ -1,15 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://bg4at2sl2np05"]
+[gd_scene load_steps=18 format=3 uid="uid://bg4at2sl2np05"]
 
 [ext_resource type="Script" path="res://Enemies/mano guarda/ManoGuarda.gd" id="1_i1nf0"]
-[ext_resource type="Texture2D" uid="uid://dk2uhic5ibiyn" path="res://player/player-sprite-sheet.png" id="2_iwrti"]
-[ext_resource type="Texture2D" uid="uid://bwen7puonvdjj" path="res://icon.svg" id="2_wbqwk"]
+[ext_resource type="Texture2D" uid="uid://144tejd2nfq6" path="res://Enemies/mano guarda/manoguaardawalk-Sheet.png" id="2_uynkv"]
 [ext_resource type="Texture2D" uid="uid://d34pi67suw88q" path="res://player/flamethrower/fire-Sheet.png" id="4_xa33d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gb64u"]
 radius = 7.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rvuer"]
-size = Vector2(15, 28)
+[sub_resource type="CircleShape2D" id="CircleShape2D_m2l0u"]
+radius = 12.0
 
 [sub_resource type="Animation" id="Animation_oyivf"]
 length = 0.001
@@ -64,6 +63,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_f3r6w"]
 resource_name = "atck"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -71,10 +71,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [8, 9, 8]
+"values": [4, 7]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -83,7 +83,7 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1),
+"times": PackedFloat32Array(0.5),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -97,7 +97,7 @@ tracks/2/path = NodePath("HitArea:monitoring")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.8),
+"times": PackedFloat32Array(0, 0.3, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -109,7 +109,7 @@ tracks/3/path = NodePath("HitArea:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.6, 0.8),
+"times": PackedFloat32Array(0, 0.3, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
@@ -153,10 +153,10 @@ tracks/1/path = NodePath("Sprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [4, 7, 4, 7, 4, 7, 4]
+"values": [0, 2, 0, 2, 0, 2, 0, 2, 0, 2]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -205,14 +205,15 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0]
+"values": [8, 10]
 }
 
 [sub_resource type="Animation" id="Animation_88e1n"]
 resource_name = "walk"
+length = 0.5
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -221,10 +222,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [4, 7]
+"values": [0, 2]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ybfm7"]
@@ -276,10 +277,9 @@ script = ExtResource("1_i1nf0")
 shape = SubResource("CircleShape2D_gb64u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
-texture = ExtResource("2_iwrti")
+texture = ExtResource("2_uynkv")
 hframes = 4
-vframes = 4
+vframes = 3
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
@@ -296,14 +296,8 @@ visible = false
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
-position = Vector2(18.5, 0)
-shape = SubResource("RectangleShape2D_rvuer")
-
-[node name="Sprite2D" type="Sprite2D" parent="HitArea"]
-modulate = Color(0.639216, 0.0666667, 0.0313726, 1)
-position = Vector2(18.5, -9.53674e-07)
-scale = Vector2(0.117187, 0.21875)
-texture = ExtResource("2_wbqwk")
+position = Vector2(5, 0)
+shape = SubResource("CircleShape2D_m2l0u")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

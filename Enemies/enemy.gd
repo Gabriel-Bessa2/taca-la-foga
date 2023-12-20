@@ -7,6 +7,8 @@ extends CharacterBody2D
 @export var speed: int = 50
 var moneyMultiplier: int = 1
 
+@onready var sprite: Sprite2D = $Sprite2D
+
 #Attacking
 @onready var attackTimer: Timer = $AttackTimer
 var isAttacking: bool = false
@@ -32,6 +34,13 @@ func _ready():
 	navigation_agent.target_desired_distance = attack_range
 
 func _physics_process(_delta):
+	if immune:
+		if randi() % 2 == 1:
+			sprite.modulate = Color(1, 0, 0)
+		else:
+			sprite.modulate = Color(1, 1, 0)
+	else:
+		sprite.modulate = Color(1, 1, 1)
 	move_and_slide()
 
 func handle_navigation() -> void:
@@ -41,7 +50,6 @@ func handle_navigation() -> void:
 		#change_state(ENEMY_STATES.ATTACKING)
 		#
 	if (!navigation_agent.is_navigation_finished()):
-		print("a2")
 		var current_agent_position: Vector2 = global_position
 		var next_path_position: Vector2 = navigation_agent.get_next_path_position()
 
