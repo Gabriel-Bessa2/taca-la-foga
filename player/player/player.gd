@@ -12,15 +12,18 @@ extends CharacterBody2D
 @export var WALK_ACCELERATION: float = 0.2
 
 enum PLAYER_STATES {MOVE, FIRE, CASH, HURT, DEAD}
-const HP_MAX: int = 10
+const HP_MAX: float = 10.0
 var state: PLAYER_STATES = PLAYER_STATES.MOVE
-var hp: int = HP_MAX
+var hp: float = HP_MAX
 
 var inputDirection: Vector2 = Vector2.ZERO
 var inputFlamethrower: bool = false
 var inputMoneyparry: bool = false
 var aimDirection : Vector2 = Vector2.LEFT
 var aimTargetDirection : Vector2 = Vector2.LEFT
+
+signal hp_changed
+signal max_hp_signal
 
 func _physics_process(_delta):
 	get_input()
@@ -81,6 +84,7 @@ func get_input():
 
 func gethit(damage: int):
 	hp = max(hp - damage, 0)
+	update_health(hp, HP_MAX) 
 	if hp == 0:
 		AnimPlayer.play("dead")
 		state = PLAYER_STATES.DEAD
@@ -95,3 +99,11 @@ func change_state(stateToChange: PLAYER_STATES):
 func instance_money_parry():
 	var moneyparryInstance = moneyparryResource.instantiate()
 	add_child(moneyparryInstance)
+	
+
+func update_health(current_health: int, max_health: int):
+	emit_signal("hp_changed", self)
+	emit_signal("max_hp_signal", self)
+	
+func _ready() -> void:
+	emit_signal("hp_changed", self)
