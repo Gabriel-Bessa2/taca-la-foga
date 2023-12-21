@@ -15,7 +15,10 @@ var proportions: Vector2 = Vector2(limit_width, limit_height)
 @onready var hpRec: ColorRect = $Control/HPRec
 @onready var moneyCount: Label = $Control/Money
 
+var screenShake: float = 0
+
 func _ready():
+	player.shakeScreen.connect(camera_shake)
 	proportions = Vector2(limit_width, limit_height)
 	if player == null:
 		push_error("player undefined on camera scene")
@@ -27,6 +30,13 @@ func _physics_process(_delta):
 	lock_position()
 	hpRec.size.x = 76*(player.hp/player.HP_MAX)
 	moneyCount.text = str(player.money) + "$"
+	
+	if screenShake != 0:
+		offset = Vector2(randf_range(-screenShake, screenShake), randf_range(-screenShake, screenShake))
+		screenShake *= 0.8
+
+func camera_shake(intensity: float):
+	screenShake = intensity
 
 func lock_position():
 	var screenSize: Vector2 = Vector2(256, 144)

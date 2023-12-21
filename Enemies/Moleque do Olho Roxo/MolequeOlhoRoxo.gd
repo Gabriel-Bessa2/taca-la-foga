@@ -1,8 +1,6 @@
 class_name MolequeOlhoRoxo
 extends Enemy
 
-@onready var hit_area = $HitArea
-@onready var sprite_2d = $HitArea/Sprite2D
 @onready var animPlayer: AnimationPlayer = $AnimationPlayer
 @onready var raycast_2d = $RayCast2D
 @onready var attack_time = $AttackTimer

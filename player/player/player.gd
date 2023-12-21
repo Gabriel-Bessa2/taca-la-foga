@@ -35,8 +35,10 @@ var inputMoneyparry: bool = false
 var aimDirection : Vector2 = Vector2.LEFT
 var aimTargetDirection : Vector2 = Vector2.LEFT
 
+signal shakeScreen(intensity: float)
 signal hp_changed
 signal max_hp_signal
+
 
 func _physics_process(_delta):
 	get_input()
@@ -71,6 +73,8 @@ func _physics_process(_delta):
 				AnimPlayer.play("walk_slow")
 			else:
 				AnimPlayer.play("idle")
+			
+			emit_signal("shakeScreen", 1)
 			
 			var flamethrowerInstance: Flamethrower = flamethrowerResource.instantiate()
 			flamethrowerInstance.position = position + aimDirection*8
@@ -128,6 +132,7 @@ func gethit(damage: int):
 		else:
 			immune = true
 			immunityTimer.start()
+		emit_signal("shakeScreen", damage*10)
 
 
 func _on_death_reset_timer_timeout():
