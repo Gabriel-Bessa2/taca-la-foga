@@ -7,6 +7,14 @@ extends CharacterBody2D
 @onready var Sprite: Sprite2D = $Sprite
 @onready var AnimPlayer: AnimationPlayer = $AnimationPlayer
 
+@onready var playerDamageAudio = $Damage
+@onready var flamethrowerAudioBegin = $FlamethrowerBegin
+@onready var flamethrowerAudioMiddle = $FlamethrowerMiddle
+@onready var flamethrowerAudioEnd = $FlamethrowerEnd
+var flameAudioTimer : float = 0
+var isIniting = true
+
+
 @export var WALK_SPEED: float = 150
 @export var FLAMETHROWER_WALK_SPEED: float = 50
 @export var WALK_ACCELERATION: float = 0.2
@@ -17,7 +25,7 @@ var state: PLAYER_STATES = PLAYER_STATES.MOVE
 const HP_MAX: float = 10.0
 var hp: float = HP_MAX
 
-@onready var immunityTimer: Timer = $immunityTimer
+@onready var immunityTimer: Timer = $ImmunityTimer
 var immune: bool = false
 
 var inputDirection: Vector2 = Vector2.ZERO
@@ -68,8 +76,21 @@ func _physics_process(_delta):
 			flamethrowerInstance.rotation_degrees = randi_range(0, 360)
 			get_tree().current_scene.add_child(flamethrowerInstance)
 			
+			if(isIniting):
+				flamethrowerAudioBegin.play()
+				isIniting = false			
+			if(flameAudioTimer > 2):
+				flameAudioTimer = 0
+			if(flameAudioTimer == 0):
+				flamethrowerAudioMiddle.play()	
+			flameAudioTimer+= _delta	
+			
 			if !inputFlamethrower:
 				state = PLAYER_STATES.MOVE
+				flamethrowerAudioMiddle.stop()
+				flamethrowerAudioEnd.play()
+				isIniting = true
+				flameAudioTimer = 0
 			
 		PLAYER_STATES.CASH:
 			AnimPlayer.play("parry")
@@ -95,6 +116,7 @@ func get_input():
 	Sprite.rotation = aimDirection.angle()
 
 func gethit(damage: int):
+	playerDamageAudio.play()
 	hp = max(hp - damage, 0)
 	update_health(hp, HP_MAX) 
 	if hp == 0:

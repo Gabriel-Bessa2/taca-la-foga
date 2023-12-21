@@ -1,7 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bql0nqi4l7dw3"]
+[gd_scene load_steps=15 format=3 uid="uid://bql0nqi4l7dw3"]
 
 [ext_resource type="Script" path="res://player/player/player.gd" id="1_bu8vp"]
 [ext_resource type="Texture2D" uid="uid://dk2uhic5ibiyn" path="res://player/player-sprite-sheet.png" id="2_skmtw"]
+[ext_resource type="AudioStream" uid="uid://hdsrtpksvbkx" path="res://Audios/fogoInicio.wav" id="3_mouyp"]
+[ext_resource type="AudioStream" uid="uid://caa7cyvi6jjsl" path="res://Audios/danoNoPlayer.wav" id="3_uour2"]
+[ext_resource type="AudioStream" uid="uid://bqr8x0eqxkl76" path="res://Audios/fogoMeio.wav" id="4_h2ywr"]
+[ext_resource type="AudioStream" uid="uid://censko3hf3l8u" path="res://Audios/fogoFinal.wav" id="5_1j42e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i62y1"]
 radius = 4.0
@@ -162,3 +166,15 @@ libraries = {
 [node name="ImmunityTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="Damage" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_uour2")
+
+[node name="FlamethrowerBegin" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_mouyp")
+
+[node name="FlamethrowerMiddle" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_h2ywr")
+
+[node name="FlamethrowerEnd" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_1j42e")
