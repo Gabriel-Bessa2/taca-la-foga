@@ -40,6 +40,11 @@ func _physics_process(_delta):
 					change_state("attack")
 				
 		"dead":
+			match get_tree().current_scene.name:
+				"level1":
+					get_tree().change_scene_to_file("res://stages/level2.tscn")
+				"level2":
+					get_tree().change_scene_to_file("res://stages/gameover.tscn")
 			queue_free()
 			
 		"hurt":
