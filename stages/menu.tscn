@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://vpuocg00ebbi"]
+[gd_scene load_steps=3 format=3 uid="uid://vpuocg00ebbi"]
 
 [ext_resource type="Script" path="res://Menu.gd" id="1_r8evf"]
+[ext_resource type="FontFile" uid="uid://d4f2qwtddl20s" path="res://Peepo.ttf" id="2_ajm5p"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -13,10 +14,24 @@ script = ExtResource("1_r8evf")
 
 [node name="PlayButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 101.0
-offset_top = 48.0
-offset_right = 146.0
-offset_bottom = 79.0
+offset_left = 112.0
+offset_top = 74.0
+offset_right = 155.0
+offset_bottom = 95.0
+theme_override_fonts/font = ExtResource("2_ajm5p")
+theme_override_font_sizes/font_size = 9
 text = "Play!"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 44.0
+offset_right = 182.0
+offset_bottom = 67.0
+theme_override_fonts/font = ExtResource("2_ajm5p")
+theme_override_font_sizes/font_size = 9
+text = "Taca-la-foga"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_button_pressed"]

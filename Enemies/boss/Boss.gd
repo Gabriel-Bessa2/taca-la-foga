@@ -1,7 +1,7 @@
 class_name Boss
 extends Enemy
 
-var start: bool = true
+var start: bool = false
 var playerDirection: Vector2
 
 @onready var animPlayer: AnimationPlayer = $AnimationPlayer
