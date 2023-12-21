@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://beg3l1prf1o54"]
+[gd_scene load_steps=4 format=3 uid="uid://beg3l1prf1o54"]
 
 [ext_resource type="Script" path="res://Enemies/Moleque do Olho Roxo/bullet.gd" id="1_6h4ji"]
+[ext_resource type="AudioStream" uid="uid://jujf11ay377a" path="res://Audios/tiroMlkOlhoRoxo.wav" id="2_mh6wh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n5cmu"]
 radius = 3.76074
@@ -22,6 +23,10 @@ offset_left = -3.0
 offset_top = -3.0
 offset_right = 3.0
 offset_bottom = 3.0
+
+[node name="tiro" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_mh6wh")
+autoplay = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_screen_exited"]

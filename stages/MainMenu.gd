@@ -1,7 +1,7 @@
 extends MarginContainer
 
 const menuScene = "res://stages/MainMenu.tscn"
-const startScene = "res://stages/level1.tscn"
+const startScene = "res://stages/intro.tscn"
 const optionsScene = "res://stages/OptionsMenu.tscn"
 
 @onready var selectorOne = $CenterContainer/VBoxContainer/Inputs/VBoxContainer/Start/HBoxContainer/Selector
