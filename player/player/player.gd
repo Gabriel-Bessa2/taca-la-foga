@@ -14,7 +14,6 @@ extends CharacterBody2D
 var flameAudioTimer : float = 0
 var isIniting = true
 
-
 @export var WALK_SPEED: float = 150
 @export var FLAMETHROWER_WALK_SPEED: float = 50
 @export var WALK_ACCELERATION: float = 0.2
@@ -36,9 +35,6 @@ var aimDirection : Vector2 = Vector2.LEFT
 var aimTargetDirection : Vector2 = Vector2.LEFT
 
 signal shakeScreen(intensity: float)
-signal hp_changed
-signal max_hp_signal
-
 
 func _physics_process(_delta):
 	get_input()
@@ -125,7 +121,6 @@ func gethit(damage: int):
 	if !immune:
 		playerDamageAudio.play()
 		hp = max(hp - damage, 0)
-		update_health(hp, HP_MAX) 
 		if hp == 0:
 			AnimPlayer.play("dead")
 			state = PLAYER_STATES.DEAD
@@ -133,7 +128,6 @@ func gethit(damage: int):
 			immune = true
 			immunityTimer.start()
 		emit_signal("shakeScreen", damage*10)
-
 
 func _on_death_reset_timer_timeout():
 	get_tree().reload_current_scene()
@@ -145,13 +139,6 @@ func instance_money_parry():
 	var moneyparryInstance = moneyparryResource.instantiate()
 	add_child(moneyparryInstance)
 	
-
-func update_health(current_health: int, max_health: int):
-	emit_signal("hp_changed", self)
-	emit_signal("max_hp_signal", self)
-	
-func _ready() -> void:
-	emit_signal("hp_changed", self)
 
 func _on_immunity_timer_timeout():
 	immune = false
