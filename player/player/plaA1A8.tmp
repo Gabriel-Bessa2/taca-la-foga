@@ -1,11 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://bql0nqi4l7dw3"]
+[gd_scene load_steps=11 format=3 uid="uid://bql0nqi4l7dw3"]
 
 [ext_resource type="Script" path="res://player/player/player.gd" id="1_bu8vp"]
 [ext_resource type="Texture2D" uid="uid://dk2uhic5ibiyn" path="res://player/player-sprite-sheet.png" id="2_skmtw"]
-[ext_resource type="AudioStream" uid="uid://hdsrtpksvbkx" path="res://Audios/fogoInicio.wav" id="3_mouyp"]
-[ext_resource type="AudioStream" uid="uid://caa7cyvi6jjsl" path="res://Audios/danoNoPlayer.wav" id="3_uour2"]
-[ext_resource type="AudioStream" uid="uid://bqr8x0eqxkl76" path="res://Audios/fogoMeio.wav" id="4_h2ywr"]
-[ext_resource type="AudioStream" uid="uid://censko3hf3l8u" path="res://Audios/fogoFinal.wav" id="5_1j42e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i62y1"]
 radius = 4.0
@@ -21,20 +17,8 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:immune")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_4603a"]
@@ -114,18 +98,6 @@ tracks/1/keys = {
 "method": &"change_state"
 }]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:immune")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.2, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
 
 [sub_resource type="Animation" id="Animation_nxqk0"]
 resource_name = "walk"
@@ -188,18 +160,7 @@ libraries = {
 }
 
 [node name="ImmunityTimer" type="Timer" parent="."]
+wait_time = 0.2
 one_shot = true
-
-[node name="Damage" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_uour2")
-
-[node name="FlamethrowerBegin" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_mouyp")
-
-[node name="FlamethrowerMiddle" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_h2ywr")
-
-[node name="FlamethrowerEnd" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_1j42e")
 
 [connection signal="timeout" from="ImmunityTimer" to="." method="_on_immunity_timer_timeout"]

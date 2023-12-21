@@ -1,0 +1,118 @@
+[gd_scene load_steps=3 format=3 uid="uid://6ibytyr4rux7"]
+
+[ext_resource type="Script" path="res://stages/MainMenu.gd" id="1_u7ymx"]
+[ext_resource type="FontFile" uid="uid://d4f2qwtddl20s" path="res://Peepo.ttf" id="2_xsvkh"]
+
+[node name="MainMenu" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u7ymx")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0, 0, 0, 0.607843)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Title" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/Title"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.952941, 0.745098, 0.407843, 1)
+theme_override_colors/font_shadow_color = Color(0.792157, 0.223529, 0.117647, 1)
+theme_override_fonts/font = ExtResource("2_xsvkh")
+theme_override_font_sizes/font_size = 32
+text = "Taca-La-Foga"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Inputs" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/Inputs"]
+layout_mode = 2
+
+[node name="Start" type="CenterContainer" parent="CenterContainer/VBoxContainer/Inputs/VBoxContainer"]
+custom_minimum_size = Vector2(77, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/Inputs/VBoxContainer/Start"]
+custom_minimum_size = Vector2(77, 0)
+layout_mode = 2
+
+[node name="Selector" type="Label" parent="CenterContainer/VBoxContainer/Inputs/VBoxContainer/Start/HBoxContainer"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0784314, 0.180392, 0.25098, 0.00392157)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "
+"
+
+[node name="OptionName" type="Label" parent="CenterContainer/VBoxContainer/Inputs/VBoxContainer/Start/HBoxContainer"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Início"
+
+[node name="Options" type="CenterContainer" parent="CenterContainer/VBoxContainer/Inputs/VBoxContainer"]
+custom_minimum_size = Vector2(77, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/Inputs/VBoxContainer/Options"]
+custom_minimum_size = Vector2(77, 0)
+layout_mode = 2
+
+[node name="Selector" type="Label" parent="CenterContainer/VBoxContainer/Inputs/VBoxContainer/Options/HBoxContainer"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "
+"
+
+[node name="OptionName" type="Label" parent="CenterContainer/VBoxContainer/Inputs/VBoxContainer/Options/HBoxContainer"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Opções"
+
+[node name="Quit" type="CenterContainer" parent="CenterContainer/VBoxContainer/Inputs/VBoxContainer"]
+custom_minimum_size = Vector2(77, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/Inputs/VBoxContainer/Quit"]
+custom_minimum_size = Vector2(77, 0)
+layout_mode = 2
+
+[node name="Selector" type="Label" parent="CenterContainer/VBoxContainer/Inputs/VBoxContainer/Quit/HBoxContainer"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+
+[node name="OptionName" type="Label" parent="CenterContainer/VBoxContainer/Inputs/VBoxContainer/Quit/HBoxContainer"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Sair
+"
+
+[connection signal="gui_input" from="CenterContainer/VBoxContainer/Inputs/VBoxContainer/Start" to="." method="_on_start_gui_input"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Inputs/VBoxContainer/Start" to="." method="_on_start_mouse_entered"]
+[connection signal="gui_input" from="CenterContainer/VBoxContainer/Inputs/VBoxContainer/Options" to="." method="_on_options_gui_input"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Inputs/VBoxContainer/Options" to="." method="_on_options_mouse_entered"]
+[connection signal="gui_input" from="CenterContainer/VBoxContainer/Inputs/VBoxContainer/Quit" to="." method="_on_quit_gui_input"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Inputs/VBoxContainer/Quit" to="." method="_on_quit_mouse_entered"]

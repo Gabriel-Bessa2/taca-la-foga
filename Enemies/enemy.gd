@@ -2,7 +2,7 @@ class_name Enemy
 extends CharacterBody2D
 
 @export var health: int = 10
-@export var moneyDrop: int = 1
+@export var moneyDrop: int = 30
 @export var dmg: int = 1
 @export var speed: int = 50
 var moneyMultiplier: int = 1
@@ -102,6 +102,7 @@ func damage(damageTaken: int):
 	immunityTimer.start()
 	
 	if health == 0:
+		target.money += moneyDrop*moneyMultiplier
 		change_state("dead")
 	elif !isAttacking:
 		change_state("hurt")

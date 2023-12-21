@@ -26,7 +26,8 @@ const HP_MAX: float = 10.0
 var hp: float = HP_MAX
 
 @onready var immunityTimer: Timer = $ImmunityTimer
-var immune: bool = false
+@export var immune: bool = false
+var money: int = 30
 
 var inputDirection: Vector2 = Vector2.ZERO
 var inputFlamethrower: bool = false
@@ -116,15 +117,16 @@ func get_input():
 	Sprite.rotation = aimDirection.angle()
 
 func gethit(damage: int):
-	playerDamageAudio.play()
-	hp = max(hp - damage, 0)
-	update_health(hp, HP_MAX) 
-	if hp == 0:
-		AnimPlayer.play("dead")
-		state = PLAYER_STATES.DEAD
-	else:
-		immune = true
-		immunityTimer.start()
+	if !immune:
+		playerDamageAudio.play()
+		hp = max(hp - damage, 0)
+		update_health(hp, HP_MAX) 
+		if hp == 0:
+			AnimPlayer.play("dead")
+			state = PLAYER_STATES.DEAD
+		else:
+			immune = true
+			immunityTimer.start()
 
 
 func _on_death_reset_timer_timeout():
@@ -144,3 +146,6 @@ func update_health(current_health: int, max_health: int):
 	
 func _ready() -> void:
 	emit_signal("hp_changed", self)
+
+func _on_immunity_timer_timeout():
+	immune = false

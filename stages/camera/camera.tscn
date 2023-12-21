@@ -1,6 +1,42 @@
-[gd_scene load_steps=2 format=3 uid="uid://cuwpswg1go8v6"]
+[gd_scene load_steps=3 format=3 uid="uid://cuwpswg1go8v6"]
 
 [ext_resource type="Script" path="res://stages/camera/camera.gd" id="1_01cl6"]
+[ext_resource type="FontFile" uid="uid://d4f2qwtddl20s" path="res://Peepo.ttf" id="2_xhsx6"]
 
 [node name="Camera" type="Camera2D"]
+z_index = 500
 script = ExtResource("1_01cl6")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -128.0
+offset_top = -72.0
+offset_right = -88.0
+offset_bottom = -32.0
+
+[node name="HpMaxRec" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 85.0
+offset_bottom = 15.0
+color = Color(0.168627, 0.105882, 0.211765, 1)
+
+[node name="HPRec" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 83.0
+offset_bottom = 13.0
+color = Color(0.0509804, 0.478431, 0.129412, 1)
+
+[node name="Money" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 15.0
+offset_right = 84.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("2_xhsx6")
+theme_override_font_sizes/font_size = 9
+text = "??? $"

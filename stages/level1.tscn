@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://dkjmo6hinji4c"]
+[gd_scene load_steps=63 format=3 uid="uid://dkjmo6hinji4c"]
 
 [ext_resource type="Texture2D" uid="uid://s4ihr7jq5je5" path="res://stages/mesinha.png" id="1_mja5s"]
 [ext_resource type="Texture2D" uid="uid://tuuy7334u3xj" path="res://stages/parede1_v2.png" id="2_52cpl"]
@@ -7,6 +7,8 @@
 [ext_resource type="FontFile" uid="uid://d4f2qwtddl20s" path="res://Peepo.ttf" id="3_583hr"]
 [ext_resource type="PackedScene" uid="uid://bg4at2sl2np05" path="res://Enemies/mano guarda/mano_guarda.tscn" id="4_r5psh"]
 [ext_resource type="PackedScene" uid="uid://cuwpswg1go8v6" path="res://stages/camera/camera.tscn" id="5_kl8c4"]
+[ext_resource type="PackedScene" uid="uid://dph4bjrdf2s56" path="res://Enemies/Moleque do Olho Roxo/moleque_olho_roxo.tscn" id="8_w80pp"]
+[ext_resource type="PackedScene" uid="uid://bboix8l8j30s1" path="res://Enemies/boss/boss.tscn" id="9_vevvn"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_x73r5"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -1062,4 +1064,24 @@ player = NodePath("../Player")
 
 [node name="TestEnemy" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_r5psh")]
 position = Vector2(344, 209)
+target = NodePath("../Player")
+
+[node name="MoloqueOlhoRoxo" parent="." node_paths=PackedStringArray("target") instance=ExtResource("8_w80pp")]
+position = Vector2(727, 251)
+target = NodePath("../Player")
+
+[node name="Boss" parent="." node_paths=PackedStringArray("target") instance=ExtResource("9_vevvn")]
+position = Vector2(689, 222)
+target = NodePath("../Player")
+
+[node name="MoloqueOlhoRoxo2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("8_w80pp")]
+position = Vector2(726, 188)
+target = NodePath("../Player")
+
+[node name="ManoGuarda" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_r5psh")]
+position = Vector2(559, 144)
+target = NodePath("../Player")
+
+[node name="ManoGuarda2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("4_r5psh")]
+position = Vector2(558, 307)
 target = NodePath("../Player")

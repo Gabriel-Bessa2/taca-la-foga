@@ -1,4 +1,4 @@
-extends Node2D
+extends Camera2D
 
 @export_group("Camera Bounds")
 ## the width of the level. Camera x position will always be between 0 and limit_width
@@ -12,6 +12,9 @@ extends Node2D
 @export_range(1,100) var smoothness: int = 2
 var proportions: Vector2 = Vector2(limit_width, limit_height)
 
+@onready var hpRec: ColorRect = $Control/HPRec
+@onready var moneyCount: Label = $Control/Money
+
 func _ready():
 	proportions = Vector2(limit_width, limit_height)
 	if player == null:
@@ -22,6 +25,8 @@ func _ready():
 
 func _physics_process(_delta):
 	lock_position()
+	hpRec.size.x = 76*(player.hp/player.HP_MAX)
+	moneyCount.text = str(player.money) + "$"
 
 func lock_position():
 	var screenSize: Vector2 = Vector2(256, 144)

@@ -2,7 +2,6 @@ class_name ManoGuarda
 extends Enemy
 
 @onready var hit_area = $HitArea
-@onready var sprite_2d = $HitArea/Sprite2D
 @onready var animPlayer: AnimationPlayer = $AnimationPlayer
 
 func _ready():

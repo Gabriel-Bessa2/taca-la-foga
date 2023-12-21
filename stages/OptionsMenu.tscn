@@ -1,0 +1,87 @@
+[gd_scene load_steps=3 format=3 uid="uid://eji6otfwihjh"]
+
+[ext_resource type="FontFile" uid="uid://d4f2qwtddl20s" path="res://Peepo.ttf" id="1_2cqdv"]
+[ext_resource type="Script" path="res://stages/OptionsMenu.gd" id="1_g4wxa"]
+
+[node name="OptionsMenu" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g4wxa")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0, 0, 0, 0.607843)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Title" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/Title"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.952941, 0.745098, 0.407843, 1)
+theme_override_colors/font_shadow_color = Color(0.792157, 0.223529, 0.117647, 1)
+theme_override_fonts/font = ExtResource("1_2cqdv")
+theme_override_font_sizes/font_size = 32
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Volume" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/Volume"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/Volume/VBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 16
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="VolumeBar" type="HScrollBar" parent="CenterContainer/VBoxContainer/Volume/VBoxContainer"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.0
+
+[node name="Return" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/Return"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Selector" type="Label" parent="CenterContainer/VBoxContainer/Return/HBoxContainer"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.952941, 0.745098, 0.407843, 1)
+theme_override_colors/font_shadow_color = Color(0.792157, 0.223529, 0.117647, 1)
+theme_override_font_sizes/font_size = 16
+
+[node name="OptionName" type="Label" parent="CenterContainer/VBoxContainer/Return/HBoxContainer"]
+custom_minimum_size = Vector2(72, 0)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "Return
+"
+
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Volume" to="." method="_on_volume_mouse_entered"]
+[connection signal="value_changed" from="CenterContainer/VBoxContainer/Volume/VBoxContainer/VolumeBar" to="." method="_on_volume_bar_value_changed"]
+[connection signal="gui_input" from="CenterContainer/VBoxContainer/Return" to="." method="_on_return_gui_input"]
+[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Return" to="." method="_on_return_mouse_entered"]

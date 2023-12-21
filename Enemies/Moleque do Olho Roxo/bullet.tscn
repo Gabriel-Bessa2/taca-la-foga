@@ -1,22 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://beg3l1prf1o54"]
+[gd_scene load_steps=3 format=3 uid="uid://beg3l1prf1o54"]
 
 [ext_resource type="Script" path="res://Enemies/Moleque do Olho Roxo/bullet.gd" id="1_6h4ji"]
-[ext_resource type="Texture2D" uid="uid://bwen7puonvdjj" path="res://icon.svg" id="2_hlauh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n5cmu"]
+radius = 3.76074
 
 [node name="Bullet" type="Area2D"]
 scale = Vector2(0.265905, 0.265905)
 script = ExtResource("1_6h4ji")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.144531, 0.144531)
-texture = ExtResource("2_hlauh")
-
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(1.78814e-07, 5.37466e-07)
+scale = Vector2(0.752148, 0.752148)
+rect = Rect2(-5, -5, 10, 10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_n5cmu")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 3.0
+offset_bottom = 3.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_screen_exited"]
