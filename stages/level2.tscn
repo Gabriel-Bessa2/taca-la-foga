@@ -514,7 +514,7 @@ source_geometry_mode = 1
 source_geometry_group_name = &"navigation"
 agent_radius = 0.0
 
-[node name="level1" type="Node2D"]
+[node name="level2" type="Node2D"]
 
 [node name="Map" type="Node2D" parent="."]
 position = Vector2(32, 16)

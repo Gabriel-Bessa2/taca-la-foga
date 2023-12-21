@@ -2,7 +2,7 @@ class_name Enemy
 extends CharacterBody2D
 
 @export var health: int = 10
-@export var moneyDrop: int = 30
+@export var moneyDrop: int = 5
 @export var dmg: int = 1
 @export var speed: int = 50
 var moneyMultiplier: int = 1
