@@ -50,7 +50,8 @@ func _physics_process(_delta):
 			else:
 				AnimPlayer.play("idle")
 			
-			if inputMoneyparry:
+			if inputMoneyparry and money >= 5:
+				money = max(money - 5, 0)
 				state = PLAYER_STATES.CASH
 			elif inputFlamethrower:
 				state = PLAYER_STATES.FIRE
